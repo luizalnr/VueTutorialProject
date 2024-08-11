@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <Header />
+    <AppHeader  />
+    <router-view path="$router.key" />
+    <FooterPage />
   </div>
 </template>
 
 <script>
-import Header from './components/AppHeader.vue'
 import './styles/global.css'
+import AppHeader  from './components/AppHeader.vue';
+import FooterPage from './pages/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Header
+    AppHeader,
+    FooterPage,
   }
 }
 </script>
 
-<style>
-</style>
+

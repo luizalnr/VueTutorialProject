@@ -1,55 +1,53 @@
 <template>
-    <header>
-      <nav class="container">
-        <a href="/">
-          <img
-            alt="WDEV"
-            id="logo"
-            src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg"
-          />
-        </a>
-  
-        <img
-          src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/menu.svg"
-          alt="Abrir menu"
-          id="menu-button"
-          @click="toggleMenu"
-        />
-  
-        <!-- Overlay que fecha o menu ao clicar -->
-        <div id="menu-overlay" v-if="menuActive" @click="closeMenu"></div>
-  
-        <!-- Menu lateral -->
-        <div id="menu-items" :class="{active:menuActive}">
-          <a href="/">
-            <img
-              alt="WDEV"
-              id="menu-logo"
-              src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg"
-            />
-          </a>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/videos">Videos</a></li>
-            <li><a href="/sobre">Sobre</a></li>
-            <li><a href="/contato">Contato</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-  </template>
-  
-  <script>
+  <header>
+
+    <nav class="container">
+
+      <a href="/"><img id="logo" alt="WDEV " src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg"></a>
+
+      <img v-on:click="openMenu" alt="Abrir menu" id="menu-button" src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/menu.svg">
+
+      <div v-on:click="closeMenu" id="menu-overlay" v-if="menuActive"></div>
+
+      <div id="menu-items" :class="{active:menuActive}">
+        <img alt="Abrir menu" id="menu-logo" src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg">
+
+        <ul>
+          <li v-on:click="closeMenu" ><router-link to ="/">Home</router-link></li>
+          <li v-on:click="closeMenu" ><router-link to ="/videos">Videos</router-link></li>
+          <li v-on:click="closeMenu" ><router-link to ="/sobre" >Sobre</router-link></li>
+          <li v-on:click="closeMenu" ><router-link to ="/contato">Contato</router-link></li>
+        </ul>
+      </div>
+
+    </nav>
+
+  </header>
+</template>
+
+
+<script>
   export default {
-    name: "AppHeader",
-    data() {
-      return {
-        menuActive: false,
-      }
+  name: 'AppHeader',
+  data() {
+    return {
+      menuActive: false
     }
+  },
+  methods:{
+   openMenu: function(){
+    this.menuActive = true;
+   },
+   closeMenu: function(){
+    this.menuActive = false;
+   }
   }
-  </script>
-  
+}
+
+
+</script>
+
+
   <style scoped>
   header {
     background-color: var(--color-background-nav);
@@ -66,6 +64,8 @@
     align-items: center;
     width: 100%;
     padding: 0 20px;
+    height: 60px;
+
   }
   
   #logo {
@@ -109,7 +109,7 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  #menu-items .active{
+  #menu-items.active{
     display: flex;
   }
 
@@ -128,5 +128,35 @@
     text-decoration: none;
     font-size: 18px;
   }
-  </style>
+
+
+
+
+ @media (min-width:700px){
+  #menu-button,
+  #menu-logo,
+  #menu-overlay{
+    display: none;
+  }
+
+  #menu-items{
+    display: flex;
+    position: static;
+    height: 60px;
+    width: auto;
+  }
+
+  ul{
+    display: flex;
+    height: 60px;
+    align-items: center;
+  }
+
+  ul li{
+    display: flex;
+    margin: 0;
+    margin-left: 20px;
+  }
+ }
   
+  </style>
